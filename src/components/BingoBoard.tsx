@@ -1,4 +1,4 @@
-import type { BingoSquareData } from '../types';
+﻿import type { BingoSquareData } from '../types';
 import { BingoSquare } from './BingoSquare';
 
 interface BingoBoardProps {
@@ -9,14 +9,21 @@ interface BingoBoardProps {
 
 export function BingoBoard({ board, winningSquareIds, onSquareClick }: BingoBoardProps) {
   return (
-    <div className="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
+    <div className="grid grid-cols-5 gap-2 w-full max-w-md mx-auto aspect-square">
       {board.map((square) => (
-        <BingoSquare
+        <div
           key={square.id}
-          square={square}
-          isWinning={winningSquareIds.has(square.id)}
-          onClick={() => onSquareClick(square.id)}
-        />
+          className="animate-fade-in"
+          style={{
+            animationDelay: `${square.id * 50}ms`,
+          }}
+        >
+          <BingoSquare
+            square={square}
+            isWinning={winningSquareIds.has(square.id)}
+            onClick={() => onSquareClick(square.id)}
+          />
+        </div>
       ))}
     </div>
   );
